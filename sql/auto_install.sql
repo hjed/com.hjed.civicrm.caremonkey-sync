@@ -62,7 +62,7 @@
 
 SET FOREIGN_KEY_CHECKS=0;
 
-DROP TABLE IF EXISTS `civicrm_google_calendar_access`;
+DROP TABLE IF EXISTS `civicrm_caremonkey_sync`;
 
 SET FOREIGN_KEY_CHECKS=1;
 -- /*******************************************************
@@ -73,18 +73,18 @@ SET FOREIGN_KEY_CHECKS=1;
 
 -- /*******************************************************
 -- *
--- * civicrm_google_calendar_access
+-- * civicrm_caremonkey_sync
 -- *
 -- * FIXME
 -- *
 -- *******************************************************/
-CREATE TABLE `civicrm_google_calendar_access` (
+CREATE TABLE `civicrm_caremonkey_sync` (
 
 
      `id` int unsigned NOT NULL AUTO_INCREMENT  COMMENT 'Entity ID that civicrm requires to be an int',
-     `google_id` varchar(255) NOT NULL   COMMENT 'Google Calendar File ID',
-     `role` varchar(255) NOT NULL   COMMENT 'The google Calendar api role',
-     `calendar_name_and_role` varchar(255) NOT NULL
+     `caremonkey_id` id NOT NULL   COMMENT 'CareMonkey Group ID',
+     `type` varchar(255) NOT NULL   COMMENT 'The CareMonkey group type (staff, member)',
+     `group_name` varchar(255) NOT NULL
 ,
         PRIMARY KEY (`id`)
  

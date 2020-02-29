@@ -4,8 +4,8 @@
 return array (
   0 => 
   array (
-    'name' => 'GoogleCalendarAccess',
-    'class' => 'CRM_GoogleCalendarAccess_DAO_GoogleCalendarAccess',
-    'table' => 'civicrm_google_calendar_access',
+    'name' => 'CaremonkeySync',
+    'class' => 'CRM_CaremonkeySync_DAO_CaremonkeySync',
+    'table' => 'civicrm_caremonkey_sync',
   ),
 );

@@ -1,4 +1,4 @@
-<h3>Connected Google CalendarInstance</h3>
+<h3>Connected CareMonkeyInstance</h3>
 
 
 {if $connected}
@@ -6,7 +6,7 @@
     <p><a href="{$oauth_url}">Connect</a></p>
     <!-- TODO: disconnect -->
 {else}
-    <p>Please authorise a Google Calendarinstance</p>
+    <p>Please authorise a CareMonkeyinstance</p>
     <p><a href="{$oauth_url}">Connect</a></p>
 {/if}
 

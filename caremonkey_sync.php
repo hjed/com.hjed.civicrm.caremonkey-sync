@@ -1,15 +1,15 @@
 <?php
 
-require_once 'google_calendar_access.civix.php';
-use CRM_GoogleCalendarAccess_ExtensionUtil as E;
+require_once 'caremonkey_sync.civix.php';
+use CRM_CaremonkeySync_ExtensionUtil as E;
 
 /**
  * Implements hook_civicrm_config().
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_config
  */
-function google_calendar_access_civicrm_config(&$config) {
-  _google_calendar_access_civix_civicrm_config($config);
+function caremonkey_sync_civicrm_config(&$config) {
+  _caremonkey_sync_civix_civicrm_config($config);
 }
 
 /**
@@ -17,8 +17,8 @@ function google_calendar_access_civicrm_config(&$config) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_xmlMenu
  */
-function google_calendar_access_civicrm_xmlMenu(&$files) {
-  _google_calendar_access_civix_civicrm_xmlMenu($files);
+function caremonkey_sync_civicrm_xmlMenu(&$files) {
+  _caremonkey_sync_civix_civicrm_xmlMenu($files);
 }
 
 /**
@@ -26,8 +26,8 @@ function google_calendar_access_civicrm_xmlMenu(&$files) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_install
  */
-function google_calendar_access_civicrm_install() {
-  _google_calendar_access_civix_civicrm_install();
+function caremonkey_sync_civicrm_install() {
+  _caremonkey_sync_civix_civicrm_install();
 }
 
 /**
@@ -35,8 +35,8 @@ function google_calendar_access_civicrm_install() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_postInstall
  */
-function google_calendar_access_civicrm_postInstall() {
-  _google_calendar_access_civix_civicrm_postInstall();
+function caremonkey_sync_civicrm_postInstall() {
+  _caremonkey_sync_civix_civicrm_postInstall();
 }
 
 /**
@@ -44,8 +44,8 @@ function google_calendar_access_civicrm_postInstall() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_uninstall
  */
-function google_calendar_access_civicrm_uninstall() {
-  _google_calendar_access_civix_civicrm_uninstall();
+function caremonkey_sync_civicrm_uninstall() {
+  _caremonkey_sync_civix_civicrm_uninstall();
 }
 
 /**
@@ -53,8 +53,8 @@ function google_calendar_access_civicrm_uninstall() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_enable
  */
-function google_calendar_access_civicrm_enable() {
-  _google_calendar_access_civix_civicrm_enable();
+function caremonkey_sync_civicrm_enable() {
+  _caremonkey_sync_civix_civicrm_enable();
 }
 
 /**
@@ -62,8 +62,8 @@ function google_calendar_access_civicrm_enable() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_disable
  */
-function google_calendar_access_civicrm_disable() {
-  _google_calendar_access_civix_civicrm_disable();
+function caremonkey_sync_civicrm_disable() {
+  _caremonkey_sync_civix_civicrm_disable();
 }
 
 /**
@@ -71,8 +71,8 @@ function google_calendar_access_civicrm_disable() {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_upgrade
  */
-function google_calendar_access_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
-  return _google_calendar_access_civix_civicrm_upgrade($op, $queue);
+function caremonkey_sync_civicrm_upgrade($op, CRM_Queue_Queue $queue = NULL) {
+  return _caremonkey_sync_civix_civicrm_upgrade($op, $queue);
 }
 
 /**
@@ -83,8 +83,8 @@ function google_calendar_access_civicrm_upgrade($op, CRM_Queue_Queue $queue = NU
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_managed
  */
-function google_calendar_access_civicrm_managed(&$entities) {
-  _google_calendar_access_civix_civicrm_managed($entities);
+function caremonkey_sync_civicrm_managed(&$entities) {
+  _caremonkey_sync_civix_civicrm_managed($entities);
 }
 
 /**
@@ -96,8 +96,8 @@ function google_calendar_access_civicrm_managed(&$entities) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_caseTypes
  */
-function google_calendar_access_civicrm_caseTypes(&$caseTypes) {
-  _google_calendar_access_civix_civicrm_caseTypes($caseTypes);
+function caremonkey_sync_civicrm_caseTypes(&$caseTypes) {
+  _caremonkey_sync_civix_civicrm_caseTypes($caseTypes);
 }
 
 /**
@@ -110,8 +110,8 @@ function google_calendar_access_civicrm_caseTypes(&$caseTypes) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_angularModules
  */
-function google_calendar_access_civicrm_angularModules(&$angularModules) {
-  _google_calendar_access_civix_civicrm_angularModules($angularModules);
+function caremonkey_sync_civicrm_angularModules(&$angularModules) {
+  _caremonkey_sync_civix_civicrm_angularModules($angularModules);
 }
 
 /**
@@ -119,8 +119,8 @@ function google_calendar_access_civicrm_angularModules(&$angularModules) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_alterSettingsFolders
  */
-function google_calendar_access_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
-  _google_calendar_access_civix_civicrm_alterSettingsFolders($metaDataFolders);
+function caremonkey_sync_civicrm_alterSettingsFolders(&$metaDataFolders = NULL) {
+  _caremonkey_sync_civix_civicrm_alterSettingsFolders($metaDataFolders);
 }
 
 /**
@@ -130,8 +130,8 @@ function google_calendar_access_civicrm_alterSettingsFolders(&$metaDataFolders =
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_entityTypes
  */
-function google_calendar_access_civicrm_entityTypes(&$entityTypes) {
-  _google_calendar_access_civix_civicrm_entityTypes($entityTypes);
+function caremonkey_sync_civicrm_entityTypes(&$entityTypes) {
+  _caremonkey_sync_civix_civicrm_entityTypes($entityTypes);
 }
 
 // --- Functions below this ship commented out. Uncomment as required. ---
@@ -141,7 +141,7 @@ function google_calendar_access_civicrm_entityTypes(&$entityTypes) {
  *
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_preProcess
  */
-function google_calendar_access_civicrm_pageRun(&$run) {
+function caremonkey_sync_civicrm_pageRun(&$run) {
 }
 
 
@@ -150,18 +150,18 @@ function google_calendar_access_civicrm_pageRun(&$run) {
  *
  * Used to get the connection id
  */
-function google_calendar_access_civicrm_oauthsync_consent_success(&$prefix) {
+function caremonkey_sync_civicrm_oauthsync_consent_success(&$prefix) {
   // we don't need to do anything here
 }
 
 /**
- * Implements hook_civicrm_oauthsync_google_calendar_access_groups_list().
+ * Implements hook_civicrm_oauthsync_caremonkey_sync_groups_list().
  *
  * Used to get the connection id
  */
-function google_calendar_access_civicrm_oauthsync_google_calendar_access_sync_groups_list(&$groups) {
+function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_sync_groups_list(&$groups) {
   // query, searches for folders in the root
-  $groups_json = CRM_GoogleCalendarAccess_GoogleCalendarHelper::getCalendarList();
+  $groups_json = CRM_CaremonkeySync_CaremonkeyHelper::getCalendarList();
 
   foreach ($groups_json as $group) {
     $groups[] = $group;
@@ -169,14 +169,14 @@ function google_calendar_access_civicrm_oauthsync_google_calendar_access_sync_gr
 }
 
 /**
- * Implements hook_civicrm_oauthsync_google_calendar_access_get_remote_user_list().
+ * Implements hook_civicrm_oauthsync_caremonkey_sync_get_remote_user_list().
  *
  * Used to sync the members of a remote group
  */
-function google_calendar_access_civicrm_oauthsync_google_calendar_access_get_remote_user_list(&$remoteGroupName, &$members) {
+function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_get_remote_user_list(&$remoteGroupName, &$members) {
   // query, searches for folders in the root
   $query = urlencode("mimeType='application/vnd.google-apps.folder' and 'root' in parents");
-  $contactIds = CRM_GoogleCalendarAccess_GoogleCalendarHelper::getAllGCalendarUserForRoleAndGroup($remoteGroupName);
+  $contactIds = CRM_CaremonkeySync_CaremonkeyHelper::getAllGCalendarUserForRoleAndGroup($remoteGroupName);
   // TODO: handle the above being an error
 
   foreach ($contactIds as $contactId) {
@@ -187,18 +187,18 @@ function google_calendar_access_civicrm_oauthsync_google_calendar_access_get_rem
 
 /**
  *
- * Implements hook_civicrm_oauthsync_google_calendar_access_update_remote_users().
+ * Implements hook_civicrm_oauthsync_caremonkey_sync_update_remote_users().
  *
  * Used to sync the members of a remote group
  */
-function google_calendar_access_civicrm_oauthsync_google_calendar_access_update_remote_users(&$remoteGroupName, &$toRemove, &$toAdd) {
+function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_update_remote_users(&$remoteGroupName, &$toRemove, &$toAdd) {
 
   foreach ($toAdd as $contactId) {
-    CRM_GoogleCalendarAccess_GoogleCalendarHelper::addContactToRemoteGroup($contactId, $remoteGroupName);
+    CRM_CaremonkeySync_CaremonkeyHelper::addContactToRemoteGroup($contactId, $remoteGroupName);
   }
   // TODO: handle the above being an error
   foreach($toRemove as $contactId) {
-    CRM_GoogleCalendarAccess_GoogleCalendarHelper::removeContactFromRemoteGroup($contactId, $remoteGroupName);
+    CRM_CaremonkeySync_CaremonkeyHelper::removeContactFromRemoteGroup($contactId, $remoteGroupName);
   }
 }
 
@@ -208,33 +208,33 @@ function google_calendar_access_civicrm_oauthsync_google_calendar_access_update_
  * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_navigationMenu
  *
  */
-function google_calendar_access_civicrm_navigationMenu(&$menu) {
-  _google_calendar_access_civix_insert_navigation_menu($menu, 'Administer', array(
-    'label' => E::ts('Google Calendar Settings'),
+function caremonkey_sync_civicrm_navigationMenu(&$menu) {
+  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer', array(
+    'label' => E::ts('CareMonkey Settings'),
     'name' => 'GoogleCalendarSync',
     'permission' => 'administer CiviCRM',
     'operator' => 'OR',
     'separator' => 0,
   ));
-  _google_calendar_access_civix_insert_navigation_menu($menu, 'Administer/GoogleCalendarSync', array(
-    'label' => E::ts('Google Calendar API Settings'),
-    'name' => 'google_calendar_access_settings',
+  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer/GoogleCalendarSync', array(
+    'label' => E::ts('CareMonkey API Settings'),
+    'name' => 'caremonkey_sync_settings',
     'url' => 'civicrm/google-calendar-folder-sync/config',
     'permission' => 'administer CiviCRM',
     'operator' => 'OR',
     'separator' => 0,
   ));
-  _google_calendar_access_civix_insert_navigation_menu($menu, 'Administer/GoogleCalendarSync', array(
-    'label' => E::ts('Google Calendar Connection'),
-    'name' => 'google_calendar_access_connection',
+  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer/GoogleCalendarSync', array(
+    'label' => E::ts('CareMonkey Connection'),
+    'name' => 'caremonkey_sync_connection',
     'url' => 'civicrm/google-calendar-folder-sync/connection',
     'permission' => 'administer CiviCRM',
     'operator' => 'OR',
     'separator' => 0,
   ));
-  _google_calendar_access_civix_navigationMenu($menu);
+  _caremonkey_sync_civix_navigationMenu($menu);
 }
 
-require_once "CRM/GoogleCalendarAccess/CRM_GoogleCalendarAccess_GoogleCalendarHelper.php";
+require_once "CRM/CaremonkeySync/CRM_CaremonkeySync_CaremonkeyHelper.php";
 require_once CRM_Extension_System::singleton()->getMapper()->keyToPath('com.hjed.civicrm.oauth-sync');
-CRM_GoogleCalendarAccess_GoogleCalendarHelper::oauthHelper();
+CRM_CaremonkeySync_CaremonkeyHelper::oauthHelper();

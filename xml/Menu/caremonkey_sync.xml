@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<menu>
+  <item>
+    <path>civicrm/caremonkey-sync/config</path>
+    <page_callback>CRM_CaremonkeySync_Form_CaremonkeySyncSettings</page_callback>
+    <title>Caremonkey Settings</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+  <item>
+    <path>civicrm/caremonkey-sync/connection</path>
+    <page_callback>CRM_CaremonkeySync_Page_CaremonkeySyncSettings</page_callback>
+    <title>Caremonkey Setup</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+  <item>
+    <path>civicrm/caremonkey-sync/oauth-callback</path>
+    <page_callback>CRM_CaremonkeySync_Page_OAuthCallback</page_callback>
+    <title>OAuthCallback</title>
+    <access_arguments>access CiviCRM</access_arguments>
+  </item>
+</menu>

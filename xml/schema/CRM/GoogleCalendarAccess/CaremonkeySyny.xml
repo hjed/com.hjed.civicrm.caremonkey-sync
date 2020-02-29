@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="iso-8859-1" ?>
 
 <table>
-  <base>CRM/GoogleCalendarAccess</base>
-  <class>GoogleCalendarAccess</class>
-  <name>civicrm_google_calendar_access</name>
+  <base>CRM/CaremonkeySync</base>
+  <class>CaremonkeySync</class>
+  <name>civicrm_caremonkey_sync</name>
   <comment>FIXME</comment>
   <log>true</log>
 
@@ -18,24 +18,23 @@
     <autoincrement>true</autoincrement>
   </primaryKey>
   <field>
-    <name>google_id</name>
-    <type>varchar</type>
-    <length>255</length>
+    <name>caremonkey_id</name>
+    <type>int unsigned</type>
     <required>true</required>
-    <comment>Google Calendar File ID</comment>
+    <comment>CareMonkey Group ID</comment>
   </field>
   <field>
-    <name>role</name>
+    <name>type</name>
     <type>varchar</type>
     <length>255</length>
     <required>true</required>
-    <comment>The google Calendar api role</comment>
+    <comment>If its a staff or user group</comment>
   </field>
 
   <field>
-    <name>calendar_name_and_role</name>
+    <name>group_name</name>
     <pseudoconstant>
-      <optionGroupName>google_calendar_access_groups_options</optionGroupName>
+      <optionGroupName>caremonkey_sync_groups_options</optionGroupName>
     </pseudoconstant>
     <type>varchar</type>
     <length>255</length>

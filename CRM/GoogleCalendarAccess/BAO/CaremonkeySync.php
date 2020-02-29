@@ -1,7 +1,7 @@
 <?php
-use CRM_GoogleCalendarAccess_ExtensionUtil as E;
+use CRM_CaremonkeySync_ExtensionUtil as E;
 
-class CRM_GoogleCalendarAccess_BAO_GoogleCalendarAccess extends CRM_GoogleCalendarAccess_DAO_GoogleCalendarAccess {
+class CRM_CaremonkeySync_BAO_CaremonkeySync extends CRM_CaremonkeySync_DAO_CaremonkeySync {
 
   const G_CALENDAR_ROLES = array(
     'freeBusyReader', 'reader', 'writer', 'owner'
@@ -16,14 +16,14 @@ class CRM_GoogleCalendarAccess_BAO_GoogleCalendarAccess extends CRM_GoogleCalend
     'writer' => array('owner')
   );
   /**
-   * Create a new GoogleCalendarAccess based on array-data
+   * Create a new CaremonkeySync based on array-data
    *
    * @param array $params key-value pairs
-   * @return CRM_GoogleCalendarAccess_DAO_GoogleCalendarAccess|NULL
+   * @return CRM_CaremonkeySync_DAO_CaremonkeySync|NULL
    */
   public static function create($params) {
-    $className = 'CRM_GoogleCalendarAccess_DAO_GoogleCalendarAccess';
-    $entityName = 'GoogleCalendarAccess';
+    $className = 'CRM_CaremonkeySync_DAO_CaremonkeySync';
+    $entityName = 'CaremonkeySync';
     $hook = 'create';
 
     CRM_Utils_Hook::pre($hook, $entityName, CRM_Utils_Array::value('id', $params), $params);
@@ -36,11 +36,11 @@ class CRM_GoogleCalendarAccess_BAO_GoogleCalendarAccess extends CRM_GoogleCalend
   }
 
   /**
-   * Create a set of new GoogleCalendarAccess based on a Google Calendar object
+   * Create a set of new CaremonkeySync based on a CareMonkey object
    * and its possible roles
    *
-   * @param array $params key-value pairs representing a file in the google Calendar rest api
-   * @return array of role based GoogleCalendarAccess's
+   * @param array $params key-value pairs representing a file in the CareMonkey rest api
+   * @return array of role based CaremonkeySync's
    */
   public static function createFromGoogCalListEntry($params) {
     $calendarName = $params['summary'];
@@ -48,8 +48,8 @@ class CRM_GoogleCalendarAccess_BAO_GoogleCalendarAccess extends CRM_GoogleCalend
     foreach (self::G_CALENDAR_ROLES as $role) {
       $nameAndRole = $role . ":" . $calendarName;
       $dbParams = array(
-        'google_id' => $params['id'],
-        'calendar_name_and_role' => $nameAndRole,
+        'caremonkey_id' => $params['id'],
+        'group_name' => $nameAndRole,
         'role' => $role
       );
 
@@ -62,11 +62,11 @@ class CRM_GoogleCalendarAccess_BAO_GoogleCalendarAccess extends CRM_GoogleCalend
   /**
    * Lookup a folder mapping
    * @param $oGroupValue the option group value to search for
-   * @return CRM_Core_DAO|object the dao containing the google_id and the role
+   * @return CRM_Core_DAO|object the dao containing the caremonkey_id and the role
    */
   public static function getByOptionGroupValue($oGroupValue) {
     $dao = CRM_Core_DAO::executeQuery(
-      "SELECT google_id, role FROM civicrm_google_calendar_access WHERE calendar_name_and_role = (%1)",
+      "SELECT caremonkey_id, role FROM civicrm_caremonkey_sync WHERE group_name = (%1)",
       array(1 => array($oGroupValue, 'String'))
     );
     $dao->fetch();

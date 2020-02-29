@@ -1,4 +1,4 @@
-Package: com.hjed.civicrm.google_calendar_access
+Package: com.hjed.civicrm.caremonkey_sync
 Copyright (C) 2018, BLUEsat UNSW
 Licensed under the GNU Affero Public License 3.0 (below).
 

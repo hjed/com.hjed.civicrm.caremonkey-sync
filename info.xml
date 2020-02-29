@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
-<extension key="com.hjed.civicrm.google_calendar_access" type="module">
-  <file>google_calendar_access</file>
-  <name>Google Calendar Folder Sync</name>
-  <description>This plugin provides basic sync capabilities to give groups access to Google Calendars</description>
+<extension key="com.hjed.civicrm.caremonkey_sync" type="module">
+  <file>caremonkey_sync</file>
+  <name>CareMonkey Folder Sync</name>
+  <description>This plugin provides basic sync capabilities to give groups access to CareMonkeys</description>
   <license>AGPL-3.0</license>
   <maintainer>
     <author>BLUEsat UNSW</author>
@@ -25,6 +25,6 @@
   </compatibility>
   <comments>This is a new, undeveloped module</comments>
   <civix>
-    <namespace>CRM/GoogleCalendarAccess</namespace>
+    <namespace>CRM/CaremonkeySync</namespace>
   </civix>
 </extension>

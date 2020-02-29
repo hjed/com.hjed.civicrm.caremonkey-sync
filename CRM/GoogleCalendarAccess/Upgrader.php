@@ -1,10 +1,10 @@
 <?php
-use CRM_GoogleCalendarAccess_ExtensionUtil as E;
+use CRM_CaremonkeySync_ExtensionUtil as E;
 
 /**
  * Collection of upgrade steps.
  */
-class CRM_GoogleCalendarAccess_Upgrader extends CRM_GoogleCalendarAccess_Upgrader_Base {
+class CRM_CaremonkeySync_Upgrader extends CRM_CaremonkeySync_Upgrader_Base {
 
   // By convention, functions that look like "function upgrade_NNNN()" are
   // upgrade tasks. They are executed in order (like Drupal's hook_update_N).
@@ -14,7 +14,7 @@ class CRM_GoogleCalendarAccess_Upgrader extends CRM_GoogleCalendarAccess_Upgrade
    */
   public function install() {
     $defaults = array();
-    $params = array('name' => 'google_calendar_access_sync_mode');
+    $params = array('name' => 'caremonkey_sync_sync_mode');
     $optionGroupParams = array('name' => 'oauth_sync_modes');
     $customField = CRM_Core_BAO_CustomField::retrieve($params, $defaults);
     $customField->option_group_id = CRM_Core_BAO_OptionGroup::retrieve($optionGroupParams, $defaults)->id;

@@ -1,22 +1,22 @@
 <?php
-use CRM_GoogleCalendarAccess_ExtensionUtil as E;
-require_once __DIR__ . "/../CRM_GoogleCalendarAccess_GoogleCalendarHelper.php";
+use CRM_CaremonkeySync_ExtensionUtil as E;
+require_once __DIR__ . "/../CRM_CaremonkeySync_CaremonkeyHelper.php";
 
-class CRM_GoogleCalendarAccess_Page_GoogleCalendarAccessSettings extends CRM_Core_Page {
+class CRM_CaremonkeySync_Page_CaremonkeySyncSettings extends CRM_Core_Page {
 
   public function run() {
     // Example: Set the page-title dynamically; alternatively, declare a static title in xml/Menu/*.xml
-    CRM_Utils_System::setTitle(E::ts('Your Google Calendar Connection'));
+    CRM_Utils_System::setTitle(E::ts('Your CareMonkey Connection'));
 
 
-    $connected = civicrm_api3('Setting', 'get', array('group' => 'google_calendar_access_token'))["values"][1]['google_calendar_accessed'];
-    $client_id = civicrm_api3('Setting', 'get', array('group' => 'google_calendar_access'))["values"][1]['google_calendar_access_client_id'];
+    $connected = civicrm_api3('Setting', 'get', array('group' => 'caremonkey_sync_token'))["values"][1]['caremonkey_synced'];
+    $client_id = civicrm_api3('Setting', 'get', array('group' => 'caremonkey_sync'))["values"][1]['caremonkey_sync_client_id'];
     $this->assign('connected', $connected);
 //    if($connected) {
 //    } else {
-      $state = CRM_GoogleCalendarAccess_GoogleCalendarHelper::oauthHelper()->newStateKey();
+      $state = CRM_CaremonkeySync_CaremonkeyHelper::oauthHelper()->newStateKey();
       $redirect_url= CRM_OauthSync_OAuthHelper::generateRedirectUrlEncoded();
-      CRM_GoogleCalendarAccess_GoogleCalendarHelper::oauthHelper()->setOauthCallbackReturnPath(
+      CRM_CaremonkeySync_CaremonkeyHelper::oauthHelper()->setOauthCallbackReturnPath(
         join('/', $this->urlPath)
       );
       $scope = urlencode("https://www.googleapis.com/auth/calendar");

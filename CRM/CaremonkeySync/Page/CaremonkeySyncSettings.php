@@ -15,20 +15,14 @@ class CRM_CaremonkeySync_Page_CaremonkeySyncSettings extends CRM_Core_Page {
 //    if($connected) {
 //    } else {
       $state = CRM_CaremonkeySync_CaremonkeyHelper::oauthHelper()->newStateKey();
-      $redirect_url= CRM_OauthSync_OAuthHelper::generateRedirectUrlEncoded();
+      $redirect_url= CRM_OauthSync_OAuthHelper::generateRedirectUrl();
+      $redirect_url = CRM_Utils_System::url('civicrm/caremonkey-sync/callback', 'reset=1', TRUE, NULL, FALSE, FALSE);
       CRM_CaremonkeySync_CaremonkeyHelper::oauthHelper()->setOauthCallbackReturnPath(
         join('/', $this->urlPath)
       );
-      $scope = urlencode("https://www.googleapis.com/auth/calendar");
       $this->assign(
         'oauth_url',
-        'https://accounts.google.com/o/oauth2/v2/auth' .
-        '?client_id=' . $client_id .
-        '&access_type=offline' .
-        '&scope=' . $scope .
-        '&redirect_uri=' . $redirect_url .
-        '&state=' . $state .
-        '&response_type=code&prompt=consent'
+        $redirect_url
       );
 //    }
     // Example: Assign a variable for use in a template

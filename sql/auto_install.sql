@@ -82,10 +82,9 @@ CREATE TABLE `civicrm_caremonkey_sync` (
 
 
      `id` int unsigned NOT NULL AUTO_INCREMENT  COMMENT 'Entity ID that civicrm requires to be an int',
-     `caremonkey_id` id NOT NULL   COMMENT 'CareMonkey Group ID',
+     `caremonkey_id` int NOT NULL   COMMENT 'CareMonkey Group ID',
      `type` varchar(255) NOT NULL   COMMENT 'The CareMonkey group type (staff, member)',
-     `group_name` varchar(255) NOT NULL
-,
+     `group_name` varchar(255) NOT NULL,
         PRIMARY KEY (`id`)
  
  

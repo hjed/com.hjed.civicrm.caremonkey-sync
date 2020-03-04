@@ -86,7 +86,6 @@
       <is_search_range>0</is_search_range>
       <weight>1</weight>
       <is_active>1</is_active>
-      <is_view>1</is_view>
       <text_length>255</text_length>
       <note_columns>60</note_columns>
       <note_rows>4</note_rows>
@@ -108,7 +107,26 @@
       <text_length>255</text_length>
       <note_columns>60</note_columns>
       <note_rows>4</note_rows>
-      <column_name>caremonkey_integation_id</column_name>
+      <column_name>caremonkey_id</column_name>
+      <in_selector>0</in_selector>
+      <custom_group_name>caremonkey_user_details</custom_group_name>
+    </CustomField>
+    <CustomField>
+      <name>caremonkey_last_synced</name>
+      <label>CareMonkey Last Synced</label>
+      <data_type>Date</data_type>
+      <html_type>Select Date</html_type>
+      <is_required>0</is_required>
+      <is_searchable>1</is_searchable>
+      <is_search_range>0</is_search_range>
+      <weight>1</weight>
+      <is_active>1</is_active>
+      <text_length>255</text_length>
+      <note_columns>60</note_columns>
+      <date_format>yy-mm-dd</date_format>
+      <time_format>2</time_format>
+      <note_rows>4</note_rows>
+      <column_name>caremonkey_last_synced</column_name>
       <in_selector>0</in_selector>
       <custom_group_name>caremonkey_user_details</custom_group_name>
     </CustomField>

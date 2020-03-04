@@ -13,7 +13,7 @@
     <access_arguments>access CiviCRM</access_arguments>
   </item>
   <item>
-    <path>civicrm/caremonkey-sync/oauth-callback</path>
+    <path>civicrm/caremonkey-sync/callback</path>
     <page_callback>CRM_CaremonkeySync_Page_OAuthCallback</page_callback>
     <title>OAuthCallback</title>
     <access_arguments>access CiviCRM</access_arguments>

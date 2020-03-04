@@ -161,7 +161,7 @@ function caremonkey_sync_civicrm_oauthsync_consent_success(&$prefix) {
  */
 function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_sync_groups_list(&$groups) {
   // query, searches for folders in the root
-  $groups_json = CRM_CaremonkeySync_CaremonkeyHelper::getCalendarList();
+  $groups_json = CRM_CaremonkeySync_CaremonkeyHelper::getGroupList();
 
   foreach ($groups_json as $group) {
     $groups[] = $group;
@@ -175,8 +175,7 @@ function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_sync_groups_list(&$gr
  */
 function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_get_remote_user_list(&$remoteGroupName, &$members) {
   // query, searches for folders in the root
-  $query = urlencode("mimeType='application/vnd.google-apps.folder' and 'root' in parents");
-  $contactIds = CRM_CaremonkeySync_CaremonkeyHelper::getAllGCalendarUserForRoleAndGroup($remoteGroupName);
+  $contactIds = CRM_CaremonkeySync_CaremonkeyHelper::getAllCaremonkeyMembersForRoleAndGroup($remoteGroupName);
   // TODO: handle the above being an error
 
   foreach ($contactIds as $contactId) {
@@ -211,23 +210,23 @@ function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_update_remote_users(&
 function caremonkey_sync_civicrm_navigationMenu(&$menu) {
   _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer', array(
     'label' => E::ts('CareMonkey Settings'),
-    'name' => 'GoogleCalendarSync',
+    'name' => 'CaremonkeySync',
     'permission' => 'administer CiviCRM',
     'operator' => 'OR',
     'separator' => 0,
   ));
-  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer/GoogleCalendarSync', array(
+  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer/CaremonkeySync', array(
     'label' => E::ts('CareMonkey API Settings'),
     'name' => 'caremonkey_sync_settings',
-    'url' => 'civicrm/google-calendar-folder-sync/config',
+    'url' => 'civicrm/caremonkey-sync/config',
     'permission' => 'administer CiviCRM',
     'operator' => 'OR',
     'separator' => 0,
   ));
-  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer/GoogleCalendarSync', array(
+  _caremonkey_sync_civix_insert_navigation_menu($menu, 'Administer/CaremonkeySync', array(
     'label' => E::ts('CareMonkey Connection'),
     'name' => 'caremonkey_sync_connection',
-    'url' => 'civicrm/google-calendar-folder-sync/connection',
+    'url' => 'civicrm/caremonkey-sync/connection',
     'permission' => 'administer CiviCRM',
     'operator' => 'OR',
     'separator' => 0,

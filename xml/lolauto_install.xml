@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="iso-8859-1" ?>
+
+<CustomData>
+  <CustomGroups>
+    <CustomGroup>
+      <name>test</name>
+      <title>test</title>
+      <extends>Individual</extends>
+      <style>Inline</style>
+      <collapse_display>1</collapse_display>
+      <help_pre>&lt;p&gt;aaa&lt;/p&gt;</help_pre>
+      <help_post></help_post>
+      <weight>1</weight>
+      <is_active>1</is_active>
+      <table_name>civicrm_value_test_1</table_name>
+      <is_multiple>0</is_multiple>
+      <collapse_adv_display>0</collapse_adv_display>
+      <created_date>2020-03-03 10:55:44</created_date>
+      <is_reserved>0</is_reserved>
+      <is_public>1</is_public>
+    </CustomGroup>
+  </CustomGroups>
+  <CustomFields>
+    <CustomField>
+      <name>test_1</name>
+      <label>test 1</label>
+      <data_type>String</data_type>
+      <html_type>Text</html_type>
+      <is_search_range>0</is_search_range>
+      <weight>1</weight>
+      <help_pre>asasd</help_pre>
+      <is_active>1</is_active>
+      <text_length>255</text_length>
+      <note_columns>60</note_columns>
+      <note_rows>4</note_rows>
+      <column_name>test_1_1</column_name>
+      <in_selector>0</in_selector>
+      <custom_group_name>test</custom_group_name>
+    </CustomField>
+    <CustomField>
+      <name>date_custom</name>
+      <label>date custom</label>
+      <data_type>Date</data_type>
+      <html_type>Select Date</html_type>
+      <is_search_range>0</is_search_range>
+      <weight>2</weight>
+      <is_active>1</is_active>
+      <text_length>255</text_length>
+      <date_format>mm/dd/yy</date_format>
+      <note_columns>60</note_columns>
+      <note_rows>4</note_rows>
+      <column_name>date_custom_2</column_name>
+      <in_selector>0</in_selector>
+      <custom_group_name>test</custom_group_name>
+    </CustomField>
+    <CustomField>
+      <name>fcxcxv</name>
+      <label>fcxcxv</label>
+      <data_type>Date</data_type>
+      <html_type>Select Date</html_type>
+      <is_search_range>0</is_search_range>
+      <weight>3</weight>
+      <is_active>1</is_active>
+      <text_length>255</text_length>
+      <date_format>yy-mm-dd</date_format>
+      <time_format>2</time_format>
+      <note_columns>60</note_columns>
+      <note_rows>4</note_rows>
+      <column_name>fcxcxv_3</column_name>
+      <in_selector>0</in_selector>
+      <custom_group_name>test</custom_group_name>
+    </CustomField>
+  </CustomFields>
+</CustomData>

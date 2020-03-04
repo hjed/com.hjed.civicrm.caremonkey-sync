@@ -42,19 +42,18 @@ class CRM_CaremonkeySync_BAO_CaremonkeySync extends CRM_CaremonkeySync_DAO_Carem
    * @param array $params key-value pairs representing a file in the CareMonkey rest api
    * @return array of role based CaremonkeySync's
    */
-  public static function createFromGoogCalListEntry($params) {
-    $calendarName = $params['summary'];
+  public static function createFromGroupsResponse($params) {
+    $groupName = $params['name'];
     $names = array();
     foreach (self::G_CALENDAR_ROLES as $role) {
-      $nameAndRole = $role . ":" . $calendarName;
       $dbParams = array(
         'caremonkey_id' => $params['id'],
-        'group_name' => $nameAndRole,
-        'role' => $role
+        'group_name' => $groupName,
+        'type' => 'member'
       );
 
       self::create($dbParams);
-      $names[] = $nameAndRole;
+      $names[] = $groupName;
     }
     return $names;
   }

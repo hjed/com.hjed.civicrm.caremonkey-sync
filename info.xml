@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <extension key="com.hjed.civicrm.caremonkey_sync" type="module">
   <file>caremonkey_sync</file>
-  <name>CareMonkey Folder Sync</name>
+  <name>CareMonkey Group Sync</name>
   <description>This plugin provides basic sync capabilities to give groups access to CareMonkeys</description>
   <license>AGPL-3.0</license>
   <maintainer>
-    <author>BLUEsat UNSW</author>
-    <email>info@bluesat.com.au</email>
+    <author>Harry J.E Day</author>
+    <email>harry@dayfamilyweb.com</email>
   </maintainer>
   <urls>
     <url desc="Main Extension Page">http://FIXME</url>

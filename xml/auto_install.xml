@@ -54,7 +54,7 @@
       <note_rows>4</note_rows>
       <column_name>civicrm_caremonkey_sync_sync_groups</column_name>
       <in_selector>0</in_selector>
-      <option_group_name>caremonkey_sync_sync_groups_options</option_group_name>
+      <option_group_name>caremonkey_sync_groups_options</option_group_name>
       <custom_group_name>caremonkey_sync_sync_settings</custom_group_name>
     </CustomField>
     <CustomField>
@@ -133,8 +133,8 @@
   </CustomFields>
   <OptionGroups>
     <OptionGroup>
-      <name>caremonkey_sync_sync_groups_options</name>
-      <title>CareMonkey Groups</title>
+      <name>caremonkey_sync_groups_options</name>
+      <title>Caremonkey Groups</title>
       <data_type>String</data_type>
       <is_reserved>1</is_reserved>
       <is_active>1</is_active>

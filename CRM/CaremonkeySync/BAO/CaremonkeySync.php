@@ -3,18 +3,6 @@ use CRM_CaremonkeySync_ExtensionUtil as E;
 
 class CRM_CaremonkeySync_BAO_CaremonkeySync extends CRM_CaremonkeySync_DAO_CaremonkeySync {
 
-  const G_CALENDAR_ROLES = array(
-    'freeBusyReader', 'reader', 'writer', 'owner'
-  );
-
-  /**
-   * map of roles to roles they should not override
-   */
-  const G_CALENDAR_ROLE_IGNORE_IF = array(
-    'freeBusyReader' => array('reader', 'writer', 'owner'),
-    'reader' =>  array('writer', 'owner'),
-    'writer' => array('owner')
-  );
   /**
    * Create a new CaremonkeySync based on array-data
    *
@@ -45,16 +33,17 @@ class CRM_CaremonkeySync_BAO_CaremonkeySync extends CRM_CaremonkeySync_DAO_Carem
   public static function createFromGroupsResponse($params) {
     $groupName = $params['name'];
     $names = array();
-    foreach (self::G_CALENDAR_ROLES as $role) {
-      $dbParams = array(
-        'caremonkey_id' => $params['id'],
-        'group_name' => $groupName,
-        'type' => 'member'
-      );
+    print("<br/><hr/>");
+    print("\nparams:");
+    print_r($params);
+    $dbParams = array(
+      'caremonkey_id' => $params['id'],
+      'group_name' => $groupName,
+      'type' => 'member'
+    );
 
-      self::create($dbParams);
-      $names[] = $groupName;
-    }
+    self::create($dbParams);
+    $names[] = $groupName;
     return $names;
   }
 

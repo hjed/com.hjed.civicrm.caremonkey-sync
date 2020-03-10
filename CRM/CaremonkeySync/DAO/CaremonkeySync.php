@@ -45,7 +45,7 @@ class CRM_CaremonkeySync_DAO_CaremonkeySync extends CRM_Core_DAO {
   /**
    * The CareMonkey group type
    *
-   * @var string$role
+   * @var string$type
    */
   public $type;
 
@@ -90,11 +90,11 @@ class CRM_CaremonkeySync_DAO_CaremonkeySync extends CRM_Core_DAO {
           'bao' => 'CRM_CaremonkeySync_DAO_CaremonkeySync',
           'localizable' => 0,
         ],
-        'role' => [
-          'name' => 'role',
+        'type' => [
+          'name' => 'type',
           'type' => CRM_Utils_Type::T_STRING,
           'title' => ts('Role'),
-          'description' => 'The CareMonkey api role',
+          'description' => 'The CareMonkey api type',
           'required' => TRUE,
           'maxlength' => 255,
           'size' => CRM_Utils_Type::HUGE,
@@ -115,7 +115,7 @@ class CRM_CaremonkeySync_DAO_CaremonkeySync extends CRM_Core_DAO {
           'bao' => 'CRM_CaremonkeySync_DAO_CaremonkeySync',
           'localizable' => 0,
           'pseudoconstant' => [
-            'optionGroupName' => 'caremonkey_sync_groups_options',
+            'optionGroupName' => 'caremonkey_sync_sync_groups_options',
             'optionEditPath' => 'civicrm/admin/options/caremonkey_sync_groups_options',
           ]
         ],

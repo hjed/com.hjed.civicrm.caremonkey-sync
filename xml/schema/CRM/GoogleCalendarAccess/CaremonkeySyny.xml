@@ -34,7 +34,7 @@
   <field>
     <name>group_name</name>
     <pseudoconstant>
-      <optionGroupName>caremonkey_sync_groups_options</optionGroupName>
+      <optionGroupName>caremonkey_sync_sync_groups_options</optionGroupName>
     </pseudoconstant>
     <type>varchar</type>
     <length>255</length>

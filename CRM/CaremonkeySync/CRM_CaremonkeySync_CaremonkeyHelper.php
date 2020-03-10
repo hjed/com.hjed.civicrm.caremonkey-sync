@@ -18,35 +18,32 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
    * Calls the caremonkey api to check we are connected
    * Redirects back if successful.
    *
-   * @param $code the code to use for the exchange
    */
-  public static function doOAuthCodeExchange($code) {
+  public static function doOAuthCodeExchange() {
     $authHeader = Civi::settings()->get('caremonkey_api_token');
 
     // make a request
-    $ch = curl_init(self::CAREMONKEY_API_REST_URL + '/organizations');
+    $ch = curl_init(self::CAREMONKEY_API_REST_URL . '/organizations');
     curl_setopt_array($ch, array(
-      CURLOPT_POST => TRUE,
       CURLOPT_RETURNTRANSFER => TRUE,
       CURLOPT_HTTPHEADER => array(
         'Content-Type: application/json',
-        'Authentication: ' . $authHeader
+        'authorization: ' . $authHeader
       ),
       // the token endpoint requires a user agent
       CURLOPT_USERAGENT => 'curl/7.55.1',
-      CURLOPT_POSTFIELDS => $postBody
     ));
     $response = curl_exec($ch);
-    if(curl_errno($ch)) {
+    if(curl_errno($ch)) { 
       echo 'Request Error:' . curl_error($ch);
+    } else if (curl_getinfo($ch, CURLINFO_HTTP_CODE) >= 300) {
+      echo 'Bad Status Code:' . curl_getinfo($ch, CURLINFO_HTTP_CODE);
       // TODO: handle this better
     } else {
         $data = json_decode($response, true);
         Civi::settings()->set("caremonkey_organisation_id", $data[0]['id']);
         Civi::settings()->set("caremonkey_sync_connected", true);
-        $return_path = CRM_Utils_System::url('civicrm/caremonkey-sync/connection', 'reset=1', TRUE, NULL, FALSE, FALSE);
-        header("Location: " . $return_path);
-        die();
+        self::oauthHelper()->doOAuthCodeExchangeSuccess();
     }
 
   }
@@ -68,6 +65,7 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
 
     // build the url
     $url = self::CAREMONKEY_API_REST_URL . $path;
+    print $url;
 
     $ch = curl_init($url);
     curl_setopt_array($ch, array(
@@ -78,13 +76,14 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
       $encodedBody = json_encode($body);
       curl_setopt($ch, CURLOPT_POSTFIELDS, $encodedBody);
     }
-    curl_setopt(
-      $curl_request,
-      CURLOPT_HTTPHEADER,
-      array(
-        'Authorization: ' . Civi::settings()->get('caremonkey_api_token'),
-        'Accept: application/json',
-        'Content-Type: application/json'
+    curl_setopt_array(
+      $ch,
+      array( 
+        CURLOPT_HTTPHEADER => array(
+          'Authorization: ' . Civi::settings()->get('caremonkey_api_token'),
+          'Accept: application/json',
+          'Content-Type: application/json'
+        )
       )
     );
 
@@ -106,10 +105,11 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
       '/organizations/' . self::getOrganisationId() . '/child_groups',
       "GET"
     );
+    print_r($groups_json);
 
     $folderNames = array();
     foreach ($groups_json as $group) {
-      $folderNames = array_merge($folderNames, CRM_CaremonkeySync_BAO_CaremonkeySync::createFromGroupsResponse($file));
+      $folderNames = array_merge($folderNames, CRM_CaremonkeySync_BAO_CaremonkeySync::createFromGroupsResponse($group));
     }
 
     return $folderNames;

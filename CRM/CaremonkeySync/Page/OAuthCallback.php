@@ -18,7 +18,9 @@ class CRM_CaremonkeySync_Page_OAuthCallback extends CRM_Core_Page {
     $helper = CRM_CaremonkeySync_CaremonkeyHelper::oauthHelper();
     //verify the callback
     if($helper->verifyState($state)) {
-      $helper->doOAuthCodeExchange($_GET['code']);
+      error_log("verify");
+      print("verify<br><hr/>");
+      CRM_CaremonkeySync_CaremonkeyHelper::doOAuthCodeExchange($_GET['code']);
     } else {
       echo "error";
     }

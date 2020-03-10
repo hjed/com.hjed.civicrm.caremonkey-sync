@@ -22,7 +22,7 @@ class CRM_CaremonkeySync_Page_CaremonkeySyncSettings extends CRM_Core_Page {
       );
       $this->assign(
         'oauth_url',
-        $redirect_url
+        $redirect_url . "&state=" . $state
       );
 //    }
     // Example: Assign a variable for use in a template

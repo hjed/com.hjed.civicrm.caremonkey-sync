@@ -133,7 +133,7 @@
   </CustomFields>
   <OptionGroups>
     <OptionGroup>
-      <name>caremonkey_sync_groups_options</name>
+      <name>caremonkey_sync_sync_groups_options</name>
       <title>Caremonkey Groups</title>
       <data_type>String</data_type>
       <is_reserved>1</is_reserved>

@@ -54,7 +54,7 @@ class CRM_CaremonkeySync_BAO_CaremonkeySync extends CRM_CaremonkeySync_DAO_Carem
    */
   public static function getByOptionGroupValue($oGroupValue) {
     $dao = CRM_Core_DAO::executeQuery(
-      "SELECT caremonkey_id, role FROM civicrm_caremonkey_sync WHERE group_name = (%1)",
+      "SELECT caremonkey_id, type FROM civicrm_caremonkey_sync WHERE group_name = (%1)",
       array(1 => array($oGroupValue, 'String'))
     );
     $dao->fetch();

@@ -116,7 +116,7 @@ class CRM_CaremonkeySync_DAO_CaremonkeySync extends CRM_Core_DAO {
           'localizable' => 0,
           'pseudoconstant' => [
             'optionGroupName' => 'caremonkey_sync_sync_groups_options',
-            'optionEditPath' => 'civicrm/admin/options/caremonkey_sync_groups_options',
+            'optionEditPath' => 'civicrm/admin/options/caremonkey_sync_sync_groups_options',
           ]
         ],
       ];

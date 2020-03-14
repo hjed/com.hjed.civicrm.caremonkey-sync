@@ -175,7 +175,7 @@ function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_sync_groups_list(&$gr
  */
 function caremonkey_sync_civicrm_oauthsync_caremonkey_sync_get_remote_user_list(&$remoteGroupName, &$members) {
   // query, searches for folders in the root
-  $contactIds = CRM_CaremonkeySync_CaremonkeyHelper::getAllCaremonkeyMembersForRoleAndGroup($remoteGroupName);
+  $contactIds = CRM_CaremonkeySync_CaremonkeyHelper::getAllCaremonkeyMembersForRoleAndGroup($remoteGroupName, true);
   // TODO: handle the above being an error
 
   foreach ($contactIds as $contactId) {

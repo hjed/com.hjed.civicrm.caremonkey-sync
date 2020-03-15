@@ -65,6 +65,8 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
 
     // build the url
     $url = self::CAREMONKEY_API_REST_URL . $path;
+    print($url);
+    print(json_encode($body));
 
     $ch = curl_init($url);
     curl_setopt_array($ch, array(
@@ -91,6 +93,7 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
       print 'Request Error:' . curl_error($ch);
       print '<br/>\nStatus Code: ' . curl_getinfo($ch, CURLINFO_HTTP_CODE);
       print_r($ch);
+      print_r($response);
       throw new CRM_Extension_Exception("CareMonkey API Request Failed");
       return CRM_Core_Error::createError("Failed to access CareMonkeyAPI");
       // TODO: handle this better
@@ -104,7 +107,6 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
       '/organizations/' . self::getOrganisationId() . '/child_groups',
       "GET"
     );
-    print_r($groups_json);
 
     $folderNames = array();
     foreach ($groups_json as $group) {
@@ -130,7 +132,15 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
    * @throws CiviCRM_API3_Exception
    */
   private static function getContactCaremonkeyId($contactId) {
-    return CRM_Contact_BAO_Contact::getPrimaryEmail($contactId);
+    $contacts = \Civi\Api4\Contact::get()
+        ->addSelect('caremonkey_user_details.caremonkey_id')
+        ->addWhere('id', '=', $contactId)
+        ->setLimit(1)
+        ->execute();
+    if(count($contacts) > 0) {
+      return $contacts[0]["caremonkey_user_details.caremonkey_id"];
+    }
+    return null;
   }
 
   /**
@@ -147,24 +157,54 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
     self::refreshLocalPermissionsCache($remoteGroup->caremonkey_id);
 
     $contactEmail = self::getContactEmail($contactId);
+    $caremonkeyId = self::getContactCaremonkeyId($contactId);
 
-    if (!self::getContactCaremonkeyId($contactId)) {
-      // TODO: create member
+    if (!$caremonkeyId) {
+      $caremonkeyId = self::createCaremonkeyContact($contactId);
     }
 
     $response = self::callCaremonkeyApi(
       '/groups/' . $remoteGroup->caremonkey_id . '/members', "POST", array(
         'members' => array(
-          array(
-            "id" => getContactCaremonkeyId($contactId),
-            "originating_bucket_id" => self::getOrganisationId()
+            array(
+              "id" => intval($caremonkeyId),
+              "originating_bucket_id" => self::getOrganisationId()
+            )
           )
-        )
       )
     );
 
     self::$groupMemberCache[$remoteGroup->caremonkey_id][$contactId] =
       array($response['id'], $response);
+  }
+
+  public static function createCaremonkeyContact(&$contactId) {
+        $contact = \Civi\Api4\Contact::get()
+            ->addSelect('emails.email', 'first_name', 'last_name')
+            ->addWhere('id', '=', $contactId)
+            ->addWhere('emails.is_primary', '=', TRUE)
+            ->setLimit(1)
+            ->execute()[0];
+        $response = self::callCaremonkeyApi(
+          '/organizations/' . self::getorganisationid() . '/members', "POST", array(
+            'member' =>
+              array(
+                'email' => $contact['emails'][0]['email'],
+                'first_name' => $contact['first_name'],
+                'last_name' => $contact['last_name']
+              )
+           
+          )
+        );
+
+        // update the contact
+        \Civi\Api4\Contact::update()
+            ->addWhere('id', '=', $contactId)
+            ->addValue('caremonkey_user_details.caremonkey_id', $response['id'])
+            ->setLimit(25)
+            ->execute();
+        
+        return $response['id'];
   }
 
   /**
@@ -217,8 +257,6 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
     // TODO: error handling
     foreach($response as $member) {
         $contact = self::findContactFromCaremonkeyUser($member);
-        print_r($member);
-        print("\n----\n");
 
         if (!key_exists($groupId, self::$groupMemberCache)) {
           self::$groupMemberCache[$groupId] = array();
@@ -226,20 +264,15 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
 
         // the last updated is the max of these two
         $last_updated = date_create($member['updated_at']);
-        print($member['updated_at']);
         if($member['profile'] != null) {
           $profile_last_updated = date_create($member['profile']['updated_at']);
           $max_last_updated = max($last_updated, $profile_last_updated);
         } else {
           $max_last_updated = $last_updated;
         }
-        print("ittr");
-        print_r($last_updated);
-        print_r($max_last_updated);
 
         if ($contact && $contact['caremonkey_user_details.caremonkey_last_synced'] != null && 
           $last_updated > $contact['caremonkey_user_details.caremonkey_last_synced']){
-          print "update users";
 
           $builder = \Civi\Api4\Contact::update()
             ->addWhere('id', '=', $contact['id']);
@@ -247,16 +280,12 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
           self::updateOrCreateMember($builder, $member, 'update', [['contact_id', '=', $contact['id']], ['is_primary', '=', '1']], $max_last_updated);
         }
 
-        print_r($conact);
-        print_r($contact == null);
-        print_r($createUsers);
         if($contact == null && $createUsers) {
-          print "create users";
 
           $builder = \Civi\Api4\Contact::create()
             ->addValue('contact_type', 'Individual');
 
-          self::updateOrCreateMember($builder, $member, 'create', null, $max_last_updated);
+          self::updateOrCreateMember($builder, $member, 'create',[['contact_id', '=', '$id']], $max_last_updated);
 
           if(count($result) > 0) {
             $contact = $result[0];
@@ -277,14 +306,14 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
    * Builds a request to the civicrm api to either update or create a contact out of civicrm data
    */
   public static function updateOrCreateMember($builder, $member, $chainMode, $whereClause, $max_last_updated) {
-    print_r($builder);
     if($member["integration_id"]) {
-      print("iid");
       $builder = $builder->addValue('external_identifier', $member["integration_id"]);
       $builder = $builder->addValue('caremonkey_user_details.caremonkey_intergration_id', $member["integration_id"]);
     }
     $builder = $builder->addValue('caremonkey_user_details.caremonkey_id', $member["id"]);
     $builder = $builder->addValue('caremonkey_user_details.caremonkey_last_synced', $max_last_updated->format(DateTimeInterface::ISO8601));
+    $builder = $builder->addValue('first_name', $member['first_name']);
+    $builder = $builder->addValue('last_name', $member['last_name']);
 
     $chain = array(
       'emails' =>  ['Email', 'replace', ['records' => [['contact_id' => '$id', 'email' => $member['email']]]]]
@@ -324,7 +353,7 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
         }
         if(key_exists('state', $member['profile'])) {
           $result = \Civi\Api4\StateProvince::get()
-            ->addWhere('name', '=', $member['profile'][''])
+            ->addWhere('name', '=', $member['profile']['state'])
             ->setLimit(1)
             ->execute();
           if(count($result) > 0) {
@@ -333,11 +362,9 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
         }
       }
     }
-    print_r($chain);
 
     $result = $builder->setChain($chain)
       ->execute();
-    print("called\n");
   }
 
   /**
@@ -383,10 +410,6 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
     self::refreshLocalPermissionsCache($remoteGroupDAO->caremonkey_id, false, $createUsers);
     foreach(self::$groupMemberCache[$remoteGroupDAO->caremonkey_id] as $contactId => $member) {
         $contactIds[] = $contactId;
-        print("\n---entry:\n");
-        print_r($contactId);
-        print_r($member);
-        print("\n---\n");
     }
     return $contactIds;
   }

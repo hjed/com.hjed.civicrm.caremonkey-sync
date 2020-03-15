@@ -65,8 +65,6 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
 
     // build the url
     $url = self::CAREMONKEY_API_REST_URL . $path;
-    print($url);
-    print(json_encode($body));
 
     $ch = curl_init($url);
     curl_setopt_array($ch, array(
@@ -93,7 +91,6 @@ class CRM_CaremonkeySync_CaremonkeyHelper {
       print 'Request Error:' . curl_error($ch);
       print '<br/>\nStatus Code: ' . curl_getinfo($ch, CURLINFO_HTTP_CODE);
       print_r($ch);
-      print_r($response);
       throw new CRM_Extension_Exception("CareMonkey API Request Failed");
       return CRM_Core_Error::createError("Failed to access CareMonkeyAPI");
       // TODO: handle this better
